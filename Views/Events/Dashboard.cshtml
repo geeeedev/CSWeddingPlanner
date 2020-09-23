@@ -26,7 +26,7 @@
         <tbody>
             @foreach (Event e in Model)
             {
-                bool currentlyAttending = e.EventRSVPs.Any(evt => evt.UserId == currUid && evt.IsAttending == true);
+                bool currentlyAttending = e.EventRSVPs.Any(rsvp => rsvp.UserId == currUid && rsvp.IsAttending == true);
 
                 <tr>
                 <th scope="row">@e.EventId</th>
