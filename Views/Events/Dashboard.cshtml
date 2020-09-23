@@ -1,0 +1,71 @@
+@model List<Event>
+@{
+    int? currUid = Context.Session.GetInt32("currUid");
+    string currUname = Context.Session.GetString("currUname");
+    string[] subHeader = {"Welcome to the Wedding Planner", currUname}; 
+}
+
+<div class="container">
+
+    @* <div class="d-flex justify-content-between mt-4 mb-4">
+        <h2>Welcome to the Wedding Planner</h2>
+        <a asp-controller="Home" asp-action="Logout">Logout  (@currUname)</a>
+    </div>   *@
+    <partial name="_nav" model="@subHeader"></partial>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">Event #</th>
+            <th scope="col">Wedding</th>
+            <th scope="col">Date</th>
+            <th scope="col">Guest#</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Event e in Model)
+            {
+                bool currentlyAttending = e.EventRSVPs.Any(evt => evt.UserId == currUid && evt.IsAttending == true);
+
+                <tr>
+                <th scope="row">@e.EventId</th>
+                <td><a asp-controller="Events" asp-action="Details" asp-route-eventId="@e.EventId">@e.WeddingName()</a></td>
+                <td>@e.Date.ToString("MMMM") @e.Date.Day, @e.Date.Year </td>
+                <td>@e.EventRSVPs.Count</td>
+                <td>
+                    <form method="POST" class="d-inline"
+                            asp-controller="Events" 
+                            asp-action="RSVP" 
+                            asp-route-eventId="@e.EventId" 
+                            asp-route-isAttending="true">
+                        <button @(currentlyAttending ? "disabled" :"") class="btn btn-link">RSVP</button>    
+                    </form>
+                    
+                    <form method="POST" class="d-inline"
+                            asp-controller="Events" 
+                            asp-action="RSVP" 
+                            asp-route-eventId="@e.EventId" 
+                            asp-route-isAttending="false">
+                        <button @(currentlyAttending ? "" : "disabled") class="btn btn-link">UnRSVP</button>    
+                    </form>
+                    
+                    @if(e.UserId == currUid)
+                    {
+                    <form method="POST" class="d-inline"
+                            asp-controller="Events" 
+                            asp-action="Delete" 
+                            asp-route-eventId="@e.EventId">
+                        <button class="btn btn-link">Delete</button>    
+                    </form>
+                    }
+                    
+                </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-dark float-right" asp-controller="Events" asp-action="New">New Wedding</a>
+
+</div>

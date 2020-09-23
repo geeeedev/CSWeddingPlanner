@@ -1,0 +1,55 @@
+
+# VS Code
+.vscode
+.vscode/
+
+
+# PY/Django
+.DS_Store
+.vscode/
+venv/
+veDjango/
+__pycache__/
+db.sqlite3
+requirements.txt
+
+
+# C# .NET Core
+.DS_Store
+.vscode/
+Migrations/
+bin/
+obj/
+#*.png
+*.sql
+appsettings.json
+# Others
+zzHomeController-DoNOTDelete-ValuableNotes.cs
+_SelectChef.cshtml
+ChefsNDishes-GwennieNeilDebugPresents.mov
+ChefsNDishes-NeilDebugHelp.mov
+
+
+# MERN dependencies
+/node_modules
+/.pnp
+.pnp.js
+node_modules/
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+

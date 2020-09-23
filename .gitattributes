@@ -1,0 +1,2 @@
+# Reclassifies `.cshtml` files as C# for this C# Project:
+*.cshtml linguist-language=C#

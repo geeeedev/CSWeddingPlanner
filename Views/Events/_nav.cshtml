@@ -1,0 +1,16 @@
+
+@model string[]
+
+<div class="d-flex justify-content-between mt-5 mb-4">
+    <h2>@Model[0]</h2>
+    <div>
+        <a asp-controller="Events" asp-action="Dashboard" class="pr-3" >Dashboard</a>
+        <a asp-controller="Home" asp-action="Logout"> Logout 
+            @if(@Model.Length==2)
+            { 
+                <p class="d-inline"> (@Model[1])</p>
+            }
+            
+        </a>
+    </div>
+</div>
